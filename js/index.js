@@ -1,7 +1,5 @@
 //Calculator rounds to the nearest integer on division
-
 $(function(){
-
   //Expression is parsed based on space character
   function getExpressionParts(expression){
     return expression.split(" ");
@@ -44,7 +42,6 @@ $(function(){
     if(Number.isNaN(operand1) || Number.isNaN(operand2))
       return "Error";
 
-
     switch (operator) {
       case "+":
         return operand1 + operand2;
@@ -62,14 +59,11 @@ $(function(){
         break;
       default:
         return "Error";
-
     }
     if(operator === "/" && operand2 === 0){
       return "Error";
     }
-
   }
-
 
   $('span').click(function(){
     let expression = $('#screen').text();
@@ -86,22 +80,24 @@ $(function(){
       if(expression.length === 0){
         expression = $(this).text();
       }
+
       //we have 2 operands and an operator = calculate the total so far
       else if (isExpressionComplete(expression)){
         expression = getAnswer(expression) + " " + $(this).text() + " ";
       }
+
       //an operator followed by '-' means 2nd operand is negative
       else if(expressionHasOperator(expression)){
         expression = expression + $(this).text();
       }
+
       // '-' is the operator
       else{
         expression = expression + " " + $(this).text() + " ";
       }
     }
-
-
     else{
+
       //Operator clicked
       if($(this).attr('class') === 'operator'){
         if (isExpressionComplete(expression)){
@@ -111,14 +107,12 @@ $(function(){
           expression = expression + " " + $(this).text() + " ";
         }
       }
+
       //Number Clicked
       else{
         expression = expression + $(this).text();
       }
     }
-
     $('#screen').html(expression);
-
   });
-
 });
